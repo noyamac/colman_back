@@ -14,9 +14,7 @@ app.use(postRouter);
 
 export const initApp = (): Promise<Express> => {
     const promise = new Promise<Express>((resolve, reject) => {
-
         const DBUrl: string | unknown = process.env.MONGODB_URI;
-        console.log(DBUrl);
 
         if (!DBUrl) {
             reject("database url is undefied");
