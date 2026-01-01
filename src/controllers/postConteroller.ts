@@ -54,4 +54,13 @@ export const updatePost = async (req: Request, res: Response) => {
     }
 }
 
+export const deletePost = async (req: Request, res: Response) => {
+    const postId: string = req.params.id;
 
+    try {
+        const response = await post.findByIdAndDelete(postId);
+        res.send(response);
+    } catch (error) {
+        res.status(500).json({ error: error instanceof Error ? error.message : 'An unknown error occurred' });
+    }
+}
