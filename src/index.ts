@@ -1,0 +1,35 @@
+import express, { Express } from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+export const initApp = (): Promise<Express> => {
+    const promise = new Promise<Express>((resolve, reject) => {
+
+        const DBUrl: string | unknown = process.env.MONGODB_URI;
+        console.log(DBUrl);
+        
+        if (!DBUrl) {
+            reject("database url is undefied");
+            return;
+        }
+
+        mongoose
+            .connect(DBUrl as string, {})
+            .then(() => {
+                resolve(app);
+            });
+
+        const db = mongoose.connection;
+        db.on("error", (error) => {
+            console.error("connection error", error);
+        });
+        db.once("open", () => {
+            console.log("Connected to MongoDB");
+        });
+    });
+    return promise;
+};
