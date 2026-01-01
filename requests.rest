@@ -5,6 +5,9 @@ GET http://localhost:3000/post
 GET http://localhost:3000/post?sender=abc
 
 ###
+GET http://localhost:3000/post/695677ab9627eb9bf2816a6b
+
+###
 POST http://localhost:3000/post
 Content-Type: application/json
 

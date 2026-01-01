@@ -26,3 +26,20 @@ export const addPost = async (req: Request, res: Response) => {
         res.status(500).json({ error: "error.message", err });
     }
 }
+
+export const getPostById = async (req: Request, res: Response) => {
+    const postId = req.params.id;
+
+    try {
+        const data = await post.findById(postId);
+        if (!data) {
+            return res.status(404).json({ error: "Data not found" });
+        } else {
+            res.json(data);
+        }
+    } catch (error) {
+        res.status(500).json({ error: error instanceof Error ? error.message : 'An unknown error occurred' });
+    }
+}
+
+

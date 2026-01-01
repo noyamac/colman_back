@@ -1,14 +1,14 @@
 import express from "express";
-import { addPost, getPost } from "../controllers/postConteroller";
+import { addPost, getPost, getPostById } from "../controllers/postConteroller";
 
 export const postRouter = express.Router();
 
 postRouter.get("/post", getPost);
 
-postRouter.get("post/:id", );
+postRouter.get("/post/:id", getPostById);
 
 postRouter.post("/post", addPost);
 
-postRouter.delete("post/:id", );
+postRouter.delete("/post/:id", );
 
-postRouter.put("post/:id", );
+postRouter.put("/post/:id", );
