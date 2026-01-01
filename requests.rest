@@ -1,2 +1,16 @@
 ###
 GET http://localhost:3000/post
+
+###
+GET http://localhost:3000/post?sender=abc
+
+###
+POST http://localhost:3000/post
+Content-Type: application/json
+
+{
+    "sender": "abc",
+    "imageUrl": "image.jpg",
+    "description": "descriptio of a post",
+    "date": "2026-01-01T13:31:41.786Z"
+}
