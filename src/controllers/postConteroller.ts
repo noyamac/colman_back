@@ -42,4 +42,16 @@ export const getPostById = async (req: Request, res: Response) => {
     }
 }
 
+export const updatePost = async (req: Request, res: Response) => {
+    const postId: string = req.params.id;
+    const updatedPost = req.body
+
+    try {
+        const response = await post.findByIdAndUpdate(postId, updatedPost, { new: true });
+        res.json(response);
+    } catch (error) {
+        res.status(500).json({ error: error instanceof Error ? error.message : 'An unknown error occurred' });
+    }
+}
+
 

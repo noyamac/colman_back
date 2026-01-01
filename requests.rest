@@ -17,3 +17,13 @@ Content-Type: application/json
     "description": "descriptio of a post",
     "date": "2026-01-01T13:31:41.786Z"
 }
+
+###
+PUT http://localhost:3000/post/695677ab9627eb9bf2816a6b
+Content-Type: application/json
+
+{
+    "imageUrl": "newimage.jpg",
+    "description": "the new descriptio of a post",
+    "date": "2026-01-01T13:57:10.573Z"
+}

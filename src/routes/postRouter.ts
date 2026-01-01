@@ -1,5 +1,5 @@
 import express from "express";
-import { addPost, getPost, getPostById } from "../controllers/postConteroller";
+import { addPost, getPost, getPostById, updatePost } from "../controllers/postConteroller";
 
 export const postRouter = express.Router();
 
@@ -11,4 +11,4 @@ postRouter.post("/post", addPost);
 
 postRouter.delete("/post/:id", );
 
-postRouter.put("/post/:id", );
+postRouter.put("/post/:id", updatePost);
