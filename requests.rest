@@ -1,0 +1,32 @@
+###
+GET http://localhost:3000/post
+
+###
+GET http://localhost:3000/post?sender=abcd
+
+###
+GET http://localhost:3000/post/69567f030f33c0ed9c5bf1cc
+
+###
+POST http://localhost:3000/post
+Content-Type: application/json
+
+{
+    "sender": "abcd",
+    "imageUrl": "image3.jpg",
+    "description": "description of a post",
+    "date": "2026-01-01T13:31:41.786Z"
+}
+
+###
+PUT http://localhost:3000/post/69567f030f33c0ed9c5bf1cc
+Content-Type: application/json
+
+{
+    "imageUrl": "newimage4.jpg",
+    "description": "the new descriptio of a post",
+    "date": "2026-01-01T13:57:10.573Z"
+}
+
+###
+DELETE  http://localhost:3000/post/695677ab9627eb9bf2816a6b
