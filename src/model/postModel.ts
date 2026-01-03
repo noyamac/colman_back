@@ -7,4 +7,7 @@ const postSchema = new mongoose.Schema({
   date: { type: Date, require: true },
 });
 
-export const post = mongoose.model("Post", postSchema);
+export type PostDocument = mongoose.InferSchemaType<typeof postSchema> &
+  mongoose.Document;
+
+export const post = mongoose.model<PostDocument>("Post", postSchema);

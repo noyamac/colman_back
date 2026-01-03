@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
+import { Model, Document } from "mongoose";
 
-class BaseController {
-  model: any;
+class BaseController<T extends Document> {
+  model: Model<T>;
 
-  constructor(model: any) {
+  constructor(model: Model<T>) {
     this.model = model;
   }
 

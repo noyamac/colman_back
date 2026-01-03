@@ -7,4 +7,10 @@ const commentSchema = new mongoose.Schema({
   date: { type: Date, require: true },
 });
 
-export const comment = mongoose.model("Comment", commentSchema);
+export type CommentDocument = mongoose.InferSchemaType<typeof commentSchema> &
+  mongoose.Document;
+
+export const comment = mongoose.model<CommentDocument>(
+  "Comment",
+  commentSchema
+);

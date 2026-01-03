@@ -1,7 +1,7 @@
-import { post } from "../model/postModel";
+import { post, PostDocument } from "../model/postModel";
 import baseController from "./baseController";
 
-class PostsController extends baseController {
+class PostsController extends baseController<PostDocument> {
   constructor() {
     super(post);
   }

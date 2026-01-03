@@ -1,7 +1,7 @@
-import { comment } from "../model/commentModel";
+import { comment, CommentDocument } from "../model/commentModel";
 import baseController from "./baseController";
 
-class CommentsController extends baseController {
+class CommentsController extends baseController<CommentDocument> {
   constructor() {
     super(comment);
   }
