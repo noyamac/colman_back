@@ -4,7 +4,7 @@ import express, { Express } from "express";
 import mongoose from "mongoose";
 import { postRouter } from "./routes/postRouter";
 
-dotenv.config({ path: ".env" });
+dotenv.config();
 
 const app = express();
 
