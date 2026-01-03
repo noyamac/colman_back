@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express, { Express } from "express";
 import mongoose from "mongoose";
 
-dotenv.config({ path: ".env" });
+dotenv.config();
 
 const app = express();
 
@@ -14,7 +14,6 @@ export const initApp = (): Promise<Express> => {
     const promise = new Promise<Express>((resolve, reject) => {
 
         const DBUrl: string | unknown = process.env.MONGODB_URI;
-        console.log(DBUrl);
         
         if (!DBUrl) {
             reject("database url is undefied");
