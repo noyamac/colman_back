@@ -14,7 +14,7 @@ class BaseController<T extends Document> {
     try {
       if (filter) {
         const data = await this.model.find(filter);
-        return res.json(data);
+        res.json(data);
       } else {
         const data = await this.model.find();
         res.json(data);
@@ -29,7 +29,7 @@ class BaseController<T extends Document> {
     try {
       const data = await this.model.findById(id);
       if (!data) {
-        return res.status(404).send("Data not found");
+        res.status(404).send("Data not found");
       } else {
         res.json(data);
       }

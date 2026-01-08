@@ -19,7 +19,7 @@ export const initApp = (): Promise<Express> => {
     const DBUrl: string | unknown = process.env.MONGODB_URI;
 
     if (!DBUrl) {
-      reject("database url is undefied");
+      reject("database url is undefined");
       return;
     }
 
