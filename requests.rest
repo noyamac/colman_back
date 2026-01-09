@@ -30,3 +30,37 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/post/695677ab9627eb9bf2816a6b
+
+###
+GET http://localhost:3000/comment
+
+###
+GET http://localhost:3000/comment/69591ea638aebd4600b7ed11
+
+###
+GET http://localhost:3000/comment?postId=69591889a973fc146336e4
+
+###
+POST http://localhost:3000/comment
+Content-Type: application/json
+
+{
+    "sender": "abcd",
+    "postId": "69591889a973fc146336e4",
+    "content": "this post is great",
+    "date": "2026-01-01T13:31:41.786Z"
+
+}
+
+###
+PUT http://localhost:3000/comment/69591d385d809d137e9865ba
+Content-Type: application/json
+
+{
+    "postId": "69591d385d809d137e9865ba",
+    "content": "this post is okay",
+    "date": "2026-01-01T13:31:41.786Z"
+}
+
+###
+DELETE  http://localhost:3000/comment/69591d385d809d137e9865ba
