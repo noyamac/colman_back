@@ -1,5 +1,5 @@
-import express from 'express';
-import postController from '../controllers/postController';
+import express from "express";
+import postController from "../controllers/postController";
 
 export const postRouter = express.Router();
 
@@ -37,7 +37,7 @@ export const postRouter = express.Router();
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.get('/post', postController.getAll.bind(postController));
+postRouter.get("/post", postController.getAll.bind(postController));
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ postRouter.get('/post', postController.getAll.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.get('/post/:id', postController.getById.bind(postController));
+postRouter.get("/post/:id", postController.getById.bind(postController));
 
 /**
  * @swagger
@@ -113,7 +113,7 @@ postRouter.get('/post/:id', postController.getById.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.post('/post', postController.create.bind(postController));
+postRouter.post("/post", postController.create.bind(postController));
 
 /**
  * @swagger
@@ -147,7 +147,7 @@ postRouter.post('/post', postController.create.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.delete('/post/:id', postController.delete.bind(postController));
+postRouter.delete("/post/:id", postController.delete.bind(postController));
 
 /**
  * @swagger
@@ -192,4 +192,4 @@ postRouter.delete('/post/:id', postController.delete.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.put('/post/:id', postController.update.bind(postController));
+postRouter.put("/post/:id", postController.update.bind(postController));
