@@ -64,3 +64,35 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/comment/69591d385d809d137e9865ba
+
+###
+GET http://localhost:3000/user
+
+###
+GET http://localhost:3000/user?username=abc
+
+###
+GET http://localhost:3000/user/69736c31af386f4f1e90c6a8
+
+###
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "username": "abcde1",
+    "email": "email2@gmail.com",
+    "password": "123",
+    "profilePicture": "usrimg.jpg"
+}
+
+###
+PUT http://localhost:3000/user/69736c31af386f4f1e90c6a8
+Content-Type: application/json
+
+{
+    "username": "abc",
+    "profilePicture": "newpic.jpg"
+}
+
+###
+DELETE  http://localhost:3000/user/69736c59af386f4f1e90c6aa
