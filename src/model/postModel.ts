@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-  sender: { type: String, required: true },
+  sender: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
   imageUrl: { type: String, required: true },
   description: { type: String },
   date: { type: Date, required: true },

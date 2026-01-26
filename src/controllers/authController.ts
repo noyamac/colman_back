@@ -54,7 +54,7 @@ const login = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Invalid email or password" });
     }
 
-    const matchPassword = bcrypt.compare(password, currUser.password);
+    const matchPassword = await bcrypt.compare(password, currUser.password);
     if (!matchPassword) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
