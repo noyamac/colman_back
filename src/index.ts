@@ -6,6 +6,7 @@ import { postRouter } from "./routes/postRouter";
 import { commentRouter } from "./routes/commentRouter";
 import { specs, swaggerUi } from "./swagger";
 import { userRouter } from "./routes/userRouter";
+import { authRouter } from "./routes/authRouter";
 
 dotenv.config();
 
@@ -21,16 +22,17 @@ app.use(
     explorer: true,
     customCss: ".swagger-ui .topbar { display: none }",
     customSiteTitle: "Posts & Comments API Documentation",
-  })
+  }),
 );
 app.get("/api-docs.json", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(specs);
 });
 
-app.use(postRouter);
-app.use(commentRouter);
-app.use(userRouter);
+app.use("/post", postRouter);
+app.use("/comment", commentRouter);
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
 
 export const initApp = (): Promise<Express> => {
   const promise = new Promise<Express>((resolve, reject) => {
