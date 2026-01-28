@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { AuthRequest } from "../middlewares/authMiddleware";
+import { AuthRequest } from "../utils/types/auth";
 import { user, UserDocument } from "../model/userModel";
 import baseController from "./baseController";
 

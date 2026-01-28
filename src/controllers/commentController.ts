@@ -1,7 +1,7 @@
 import { comment, CommentDocument } from "../model/commentModel";
 import { Response } from "express";
-import { AuthRequest } from "../middlewares/authMiddleware";
 import baseController from "./baseController";
+import { AuthRequest } from "../utils/types/auth";
 
 class CommentsController extends baseController<CommentDocument> {
   constructor() {
