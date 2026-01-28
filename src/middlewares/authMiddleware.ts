@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
-
-export type AuthRequest = Request & { user?: { _id: string } };
+import { AuthRequest } from "../utils/types/auth";
 
 const authMiddleware = (
   req: AuthRequest,
@@ -13,7 +12,7 @@ const authMiddleware = (
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const token = authHeader.split(" ")[1];
+  const token: string = authHeader.split(" ")[1];
   const secret: string = process.env.JWT_SECRET || "secretkey";
 
   try {
