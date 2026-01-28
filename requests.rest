@@ -103,15 +103,15 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/user/6977d0a0241c94cf5b34e32e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc3ZDBhMDI0MWM5NGNmNWIzNGUzMmUiLCJpYXQiOjE3Njk0NTk4NzIsImV4cCI6MTc2OTQ2MzQ3Mn0.xTM8FhCWx-pP9vHxZX7Gk7NPXWuUbha8Z0Ek23zQ0a8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc0ZDJkNDJlNDA2OWU4ZGUyYjZiOTIiLCJpYXQiOjE3Njk1NDgxODEsImV4cCI6MTc2OTU0ODIxN30.SVBzaqRo1ffksS_Bcg6wx56q57RUI9pM7rexsLz9RaE
 
 ###
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "username": "eee",
-    "email": "emaaa@gmail.com",
+    "username": "ee",
+    "email": "emaa@gmail.com",
     "password": "12344"
 }
 
@@ -120,8 +120,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "emaillyarin@gmail.com",
-    "password": "123"
+    "email": "emaaa@gmail.com",
+    "password": "12344"
 }
 
 ###
@@ -130,5 +130,10 @@ Content-Type: application/json
 
 {
     "refreshToken": 
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc3ZGE5YzNjMDU5NTdhZDg4ZTg1ZDIiLCJpYXQiOjE3Njk0NjI0MjgsImV4cCI6MTc2OTU0ODgyOH0.A_6WuuV9qHABIfb73CxbMaFbpP5JkDEuN1Hv0uiOP7A"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdhNTQ4YjU1NGMyODI4NTUyMDFkNjciLCJpYXQiOjE3Njk2MzA3MjMsImV4cCI6MTc2OTcxNzEyM30.zDEL6FVoRsF3GsjZFfLPdNo7fTjStCO7GQMSpsg8KgM"
 }
+
+###
+POST http://localhost:3000/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdhNTQ4YjU1NGMyODI4NTUyMDFkNjciLCJpYXQiOjE3Njk2MzA2OTAsImV4cCI6MTc2OTcxNzA5MH0.xx8jaslLMRUostRbrU48CITe18u5Exp8Zy9NRVe3vhw
+Content-Type: application/json

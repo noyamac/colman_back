@@ -6,6 +6,9 @@ import { Tokens } from "../utils/types";
 
 const generateToken = (userId: string): Tokens => {
   const secret: string = process.env.JWT_SECRET || "secretkey";
+  const refreshTokenSecret: string =
+    process.env.JWT_REFRESH_TOKEN_SECRET || "secretkey";
+
   const exp: number = parseInt(process.env.JWT_EXPIRES_IN || "3600");
   const token: string = jwt.sign({ userId: userId }, secret, {
     expiresIn: exp,
@@ -14,9 +17,13 @@ const generateToken = (userId: string): Tokens => {
     process.env.JWT_REFRESH_EXPIRES_IN || "86400",
   );
 
-  const refreshToken: string = jwt.sign({ userId: userId }, secret, {
-    expiresIn: refreshexp,
-  });
+  const refreshToken: string = jwt.sign(
+    { userId: userId },
+    refreshTokenSecret,
+    {
+      expiresIn: refreshexp,
+    },
+  );
 
   return { token, refreshToken };
 };
@@ -48,8 +55,10 @@ const register = async (req: Request, res: Response) => {
     await newUser.save();
 
     res.status(201).json({ tokens });
-  } catch {
-    return res.status(400).json({ error: "Failed to register the user" });
+  } catch (err) {
+    return res
+      .status(400)
+      .json({ error: "Failed to register the user", details: err });
   }
 };
 
@@ -74,11 +83,45 @@ const login = async (req: Request, res: Response) => {
     const tokens: Tokens = generateToken(currUser._id.toString());
 
     currUser.tokens.push(tokens.refreshToken);
+
     await currUser.save();
 
     res.status(201).json({ tokens });
-  } catch {
-    return res.status(400).json({ error: "Failed to login" });
+  } catch (err) {
+    return res.status(400).json({ error: "Failed to login", details: err });
+  }
+};
+
+const logout = async (req: Request, res: Response) => {
+  const authHeader = req.headers["authorization"];
+  const refreshToken = authHeader && authHeader.split(" ")[1];
+
+  if (!refreshToken) {
+    return res.status(400).json({ error: "Refresh token is required" });
+  }
+
+  const secret: string = process.env.JWT_REFRESH_TOKEN_SECRET || "secretkey";
+
+  try {
+    const decoded: any = jwt.verify(refreshToken, secret);
+
+    const currUser = await user.findById(decoded.userId);
+
+    if (!currUser) {
+      return res.status(400).json({ error: "Failed to logout" });
+    }
+
+    if (!currUser.tokens.includes(refreshToken)) {
+      currUser.tokens = [];
+      await currUser.save();
+      return res.status(400).json({ error: "Failed to logout" });
+    }
+
+    currUser.tokens = currUser.tokens.filter((token) => token !== refreshToken);
+    await currUser.save();
+    return res.status(200).send();
+  } catch (err) {
+    return res.status(400).json({ error: "Failed to logout", details: err });
   }
 };
 
@@ -90,7 +133,7 @@ const refreshToken = async (req: Request, res: Response) => {
   }
 
   try {
-    const secret: string = process.env.JWT_SECRET || "secretkey";
+    const secret: string = process.env.JWT_REFRESH_TOKEN_SECRET || "secretkey";
     const decoded: any = jwt.verify(refreshToken, secret);
 
     const currUser = await user.findById(decoded.userId);
@@ -106,18 +149,21 @@ const refreshToken = async (req: Request, res: Response) => {
     }
 
     const tokens = generateToken(currUser._id.toString());
-    currUser.tokens.push(tokens.refreshToken);
     currUser.tokens = currUser.tokens.filter((token) => token !== refreshToken);
+    currUser.tokens.push(tokens.refreshToken);
     await currUser.save();
 
     res.status(200).json(tokens);
-  } catch {
-    return res.status(401).json({ error: "Refresh token is required" });
+  } catch (err) {
+    return res
+      .status(400)
+      .json({ error: "Failed to refresh token", details: err });
   }
 };
 
 export default {
   register,
   login,
+  logout,
   refreshToken,
 };
