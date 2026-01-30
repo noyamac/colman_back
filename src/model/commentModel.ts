@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema({
-  postId: { type: String, require: true },
-  sender: { type: String, require: true },
-  content: { type: String, require: true },
-  date: { type: Date, require: true },
+  postId: { type: String, required: true },
+  sender: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
+  content: { type: String, required: true },
+  date: { type: Date, required: true },
 });
 
 export type CommentDocument = mongoose.InferSchemaType<typeof commentSchema> &
@@ -12,5 +16,5 @@ export type CommentDocument = mongoose.InferSchemaType<typeof commentSchema> &
 
 export const comment = mongoose.model<CommentDocument>(
   "Comment",
-  commentSchema
+  commentSchema,
 );

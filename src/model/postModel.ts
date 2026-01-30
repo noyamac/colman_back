@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-  sender: { type: String, require: true },
-  imageUrl: { type: String, require: true },
+  sender: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
+  imageUrl: { type: String, required: true },
   description: { type: String },
-  date: { type: Date, require: true },
+  date: { type: Date, required: true },
 });
 
 export type PostDocument = mongoose.InferSchemaType<typeof postSchema> &
