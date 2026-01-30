@@ -1,5 +1,6 @@
 import express from "express";
 import postController from "../controllers/postController";
+import authMiddleware from "../middlewares/authMiddleware";
 
 export const postRouter = express.Router();
 
@@ -37,7 +38,7 @@ export const postRouter = express.Router();
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.get("/post", postController.getAll.bind(postController));
+postRouter.get("/", postController.getAll.bind(postController));
 
 /**
  * @swagger
@@ -68,7 +69,7 @@ postRouter.get("/post", postController.getAll.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.get("/post/:id", postController.getById.bind(postController));
+postRouter.get("/:id", postController.getById.bind(postController));
 
 /**
  * @swagger
@@ -113,7 +114,11 @@ postRouter.get("/post/:id", postController.getById.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.post("/post", postController.create.bind(postController));
+postRouter.post(
+  "/",
+  authMiddleware,
+  postController.create.bind(postController),
+);
 
 /**
  * @swagger
@@ -147,7 +152,11 @@ postRouter.post("/post", postController.create.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.delete("/post/:id", postController.delete.bind(postController));
+postRouter.delete(
+  "/:id",
+  authMiddleware,
+  postController.delete.bind(postController),
+);
 
 /**
  * @swagger
@@ -192,4 +201,8 @@ postRouter.delete("/post/:id", postController.delete.bind(postController));
  *         $ref: '#/components/responses/ServerError'
  */
 
-postRouter.put("/post/:id", postController.update.bind(postController));
+postRouter.put(
+  "/:id",
+  authMiddleware,
+  postController.update.bind(postController),
+);

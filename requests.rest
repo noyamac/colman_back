@@ -5,21 +5,23 @@ GET http://localhost:3000/post
 GET http://localhost:3000/post?sender=abcd
 
 ###
-GET http://localhost:3000/post/69567f030f33c0ed9c5bf1cc
+GET http://localhost:3000/post/6977c94fd0c43ba5be159846
 
 ###
 POST http://localhost:3000/post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc3ZDdlNDM5NmM2OWE4ZDgzOGVhNmQiLCJpYXQiOjE3Njk0NjE3MzIsImV4cCI6MTc2OTQ2MTc2OH0.TlkHwiJqWd_-vTlADpcYGP_eKLbD60Gt9zckdYzdgYk
 Content-Type: application/json
 
 {
     "sender": "abcd",
     "imageUrl": "image3.jpg",
-    "description": "description of a post",
+    "description": "ssdescription of a post",
     "date": "2026-01-01T13:31:41.786Z"
 }
 
 ###
-PUT http://localhost:3000/post/69567f030f33c0ed9c5bf1cc
+PUT http://localhost:3000/post/6977c768d0c43ba5be15983e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc0ZDJkNDJlNDA2OWU4ZGUyYjZiOTIiLCJpYXQiOjE3Njk0NTY3MDYsImV4cCI6MTc2OTQ2MDMwNn0.RL2iSOIlKhUImsl3SsGJjoEKL80y-RU3GHEHjyunY2I
 Content-Type: application/json
 
 {
@@ -29,41 +31,44 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:3000/post/695677ab9627eb9bf2816a6b
+DELETE  http://localhost:3000/post/6977c768d0c43ba5be15983e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc0ZDJkNDJlNDA2OWU4ZGUyYjZiOTIiLCJpYXQiOjE3Njk0NTY3MDYsImV4cCI6MTc2OTQ2MDMwNn0.RL2iSOIlKhUImsl3SsGJjoEKL80y-RU3GHEHjyunY2I
 
 ###
 GET http://localhost:3000/comment
 
 ###
-GET http://localhost:3000/comment/69591ea638aebd4600b7ed11
+GET http://localhost:3000/comment/6977aede6368538c84d6a416
 
 ###
 GET http://localhost:3000/comment?postId=69591889a973fc146336e4
 
 ###
 POST http://localhost:3000/comment
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc0ZDJkNDJlNDA2OWU4ZGUyYjZiOTIiLCJpYXQiOjE3Njk0NTY3MDYsImV4cCI6MTc2OTQ2MDMwNn0.RL2iSOIlKhUImsl3SsGJjoEKL80y-RU3GHEHjyunY2I
 Content-Type: application/json
 
 {
-    "sender": "abcd",
-    "postId": "69591889a973fc146336e4",
+    "postId": "6977c94fd0c43ba5be159846",
     "content": "this post is great",
     "date": "2026-01-01T13:31:41.786Z"
 
 }
 
 ###
-PUT http://localhost:3000/comment/69591d385d809d137e9865ba
+PUT http://localhost:3000/comment/6977c9f457348a2884b51dd4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc0ZDJkNDJlNDA2OWU4ZGUyYjZiOTIiLCJpYXQiOjE3Njk0NTY3MDYsImV4cCI6MTc2OTQ2MDMwNn0.RL2iSOIlKhUImsl3SsGJjoEKL80y-RU3GHEHjyunY2I
 Content-Type: application/json
 
 {
-    "postId": "69591d385d809d137e9865ba",
+    "postId": "6977c94fd0c43ba5be159846",
     "content": "this post is okay",
     "date": "2026-01-01T13:31:41.786Z"
 }
 
 ###
-DELETE  http://localhost:3000/comment/69591d385d809d137e9865ba
+DELETE  http://localhost:3000/comment/6977c9f457348a2884b51dd4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc0ZDJkNDJlNDA2OWU4ZGUyYjZiOTIiLCJpYXQiOjE3Njk0NTY3MDYsImV4cCI6MTc2OTQ2MDMwNn0.RL2iSOIlKhUImsl3SsGJjoEKL80y-RU3GHEHjyunY2I
 
 ###
 GET http://localhost:3000/user
@@ -76,23 +81,59 @@ GET http://localhost:3000/user/69736c31af386f4f1e90c6a8
 
 ###
 POST http://localhost:3000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc3ZDBhMDI0MWM5NGNmNWIzNGUzMmUiLCJpYXQiOjE3Njk0NTk4NzIsImV4cCI6MTc2OTQ2MzQ3Mn0.xTM8FhCWx-pP9vHxZX7Gk7NPXWuUbha8Z0Ek23zQ0a8
 Content-Type: application/json
 
 {
-    "username": "abcde1",
-    "email": "email2@gmail.com",
+    "username": "ab",
+    "email": "aaaa@gmail.com",
     "password": "123",
     "profilePicture": "usrimg.jpg"
 }
 
 ###
-PUT http://localhost:3000/user/69736c31af386f4f1e90c6a8
+PUT http://localhost:3000/user/6977d0a0241c94cf5b34e32e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc3ZDBhMDI0MWM5NGNmNWIzNGUzMmUiLCJpYXQiOjE3Njk0NTk4NzIsImV4cCI6MTc2OTQ2MzQ3Mn0.xTM8FhCWx-pP9vHxZX7Gk7NPXWuUbha8Z0Ek23zQ0a8
 Content-Type: application/json
 
 {
-    "username": "abc",
+    "username": "abaa",
     "profilePicture": "newpic.jpg"
 }
 
 ###
-DELETE  http://localhost:3000/user/69736c59af386f4f1e90c6aa
+DELETE  http://localhost:3000/user/6977d0a0241c94cf5b34e32e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTc0ZDJkNDJlNDA2OWU4ZGUyYjZiOTIiLCJpYXQiOjE3Njk1NDgxODEsImV4cCI6MTc2OTU0ODIxN30.SVBzaqRo1ffksS_Bcg6wx56q57RUI9pM7rexsLz9RaE
+
+###
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "ee",
+    "email": "emaa@gmail.com",
+    "password": "12344"
+}
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "emaaa@gmail.com",
+    "password": "12344"
+}
+
+###
+POST http://localhost:3000/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": 
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdhNTQ4YjU1NGMyODI4NTUyMDFkNjciLCJpYXQiOjE3Njk2MzA3MjMsImV4cCI6MTc2OTcxNzEyM30.zDEL6FVoRsF3GsjZFfLPdNo7fTjStCO7GQMSpsg8KgM"
+}
+
+###
+POST http://localhost:3000/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdhNTQ4YjU1NGMyODI4NTUyMDFkNjciLCJpYXQiOjE3Njk2MzA2OTAsImV4cCI6MTc2OTcxNzA5MH0.xx8jaslLMRUostRbrU48CITe18u5Exp8Zy9NRVe3vhw
+Content-Type: application/json

@@ -1,26 +1,27 @@
-import express from 'express';
-import commentController from '../controllers/commentController';
+import express from "express";
+import commentController from "../controllers/commentController";
+import authMiddleware from "../middlewares/authMiddleware";
 
 export const commentRouter = express.Router();
 
-commentRouter.get('/comment', commentController.getAll.bind(commentController));
+commentRouter.get("/", commentController.getAll.bind(commentController));
 
-commentRouter.get(
-  '/comment/:id',
-  commentController.getById.bind(commentController),
-);
+commentRouter.get("/:id", commentController.getById.bind(commentController));
 
 commentRouter.post(
-  '/comment',
+  "/",
+  authMiddleware,
   commentController.create.bind(commentController),
 );
 
 commentRouter.delete(
-  '/comment/:id',
+  "/:id",
+  authMiddleware,
   commentController.delete.bind(commentController),
 );
 
 commentRouter.put(
-  '/comment/:id',
+  "/:id",
+  authMiddleware,
   commentController.update.bind(commentController),
 );
