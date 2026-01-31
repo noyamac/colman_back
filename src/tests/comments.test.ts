@@ -50,6 +50,22 @@ describe('Comments API', () => {
     });
   });
 
+  test('Post a new comment with server error', async () => {
+    const dbSpy = jest
+      .spyOn(comment, 'create')
+      .mockRejectedValueOnce(new Error('Database Error'));
+
+    const response = await request(app)
+      .post('/comment')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send(commentMock[0]);
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body.error).toBeDefined();
+
+    dbSpy.mockRestore();
+  });
+
   test('Post two comments', async () => {
     const response = await request(app)
       .post('/comment')
@@ -63,6 +79,17 @@ describe('Comments API', () => {
     const response = await request(app).get('/comment');
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(3);
+  });
+
+  test('Get comments with server error', async () => {
+    const dbSpy = jest
+      .spyOn(comment, 'find')
+      .mockRejectedValueOnce(new Error('Database Error'));
+    const response = await request(app).get('/comment');
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body.error).toBeDefined();
+    dbSpy.mockRestore();
   });
 
   test('Get comments by post id', async () => {
@@ -86,6 +113,13 @@ describe('Comments API', () => {
     expect(response.body._id).toBe(commentId);
   });
 
+  test('Get comment by non existing ID', async () => {
+    const response = await request(app).get(
+      '/comment/' + '6977aede6368538c84d6a41a',
+    );
+    expect(response.statusCode).toBe(404);
+  });
+
   test('Update comment by id', async () => {
     const commentId = (
       await request(app)
@@ -100,6 +134,30 @@ describe('Comments API', () => {
       .send(commentMock[4]);
     expect(response.statusCode).toBe(200);
     expect(response.body.content).toBe(commentMock[4].content);
+  });
+
+  test('Update comment by id with server error', async () => {
+    const commentId = (
+      await request(app)
+        .post('/comment')
+        .set('Authorization', 'Bearer ' + accessToken)
+        .send(commentMock[4])
+    ).body._id;
+    commentMock[4].content = 'great post';
+
+    const dbSpy = jest
+      .spyOn(comment, 'findByIdAndUpdate')
+      .mockRejectedValueOnce(new Error('Database Error'));
+
+    const response = await request(app)
+      .put('/comment/' + commentId)
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send(commentMock[4]);
+
+    expect(response.statusCode).toBe(500);
+    expect(response.body.error).toBeDefined();
+
+    dbSpy.mockRestore();
   });
 
   test('Delete comment by id', async () => {

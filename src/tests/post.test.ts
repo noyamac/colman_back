@@ -46,11 +46,38 @@ describe('Posts API', () => {
     expect(res.body.sender).toBe(userId);
   });
 
+  test('Create post with server error', async () => {
+    const dbSpy = jest
+      .spyOn(post, 'create')
+      .mockRejectedValueOnce(new Error('Database Error'));
+
+    const res = await request(app)
+      .post('/post')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send(postMock[0]);
+
+    expect(res.statusCode).toBe(500);
+    expect(res.body.error).toBeDefined();
+
+    dbSpy.mockRestore();
+  });
+
   test('Get all posts', async () => {
     const res = await request(app).get('/post');
 
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toBe(1);
+  });
+
+  test('Get all posts with server error', async () => {
+    const dbSpy = jest
+      .spyOn(post, 'find')
+      .mockRejectedValueOnce(new Error('Database Error'));
+    const res = await request(app).get('/post');
+
+    expect(res.statusCode).toBe(500);
+    expect(res.body.error).toBeDefined();
+    dbSpy.mockRestore();
   });
 
   test('Get post by ID', async () => {
@@ -65,6 +92,11 @@ describe('Posts API', () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body._id).toBe(postId);
+  });
+
+  test('Get non existing post by ID', async () => {
+    const res = await request(app).get('/post/' + '6977c95fd0c43ba5be159849');
+    expect(res.statusCode).toBe(404);
   });
 
   test('Get post by sender', async () => {
@@ -89,6 +121,28 @@ describe('Posts API', () => {
 
     expect(res.statusCode).toBe(200);
     expect(res.body.description).toBe('Updated');
+  });
+
+  test('Update post with server error', async () => {
+    const createRes = await request(app)
+      .post('/post')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send(postMock[0]);
+
+    const postId = createRes.body._id;
+    const dbSpy = jest
+      .spyOn(post, 'findByIdAndUpdate')
+      .mockRejectedValueOnce(new Error('Database Error'));
+
+    const res = await request(app)
+      .put('/post/' + postId)
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send({ description: 'Updated' });
+
+    expect(res.statusCode).toBe(500);
+    expect(res.body.error).toBeDefined();
+
+    dbSpy.mockRestore();
   });
 
   test('Delete post', async () => {
