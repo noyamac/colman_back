@@ -8,7 +8,7 @@ const options: swaggerJsdoc.Options = {
       title: "Auth, Comments, Posts and Users REST API",
       version: "1.0.0",
       description:
-        "A REST API for managing auth,  comments, posts and with users user authentication",
+        "A REST API for managing auth, comments, posts and users with user authentication",
       contact: {
         name: "Yarin and Noya",
         email: "email@example.com",
@@ -62,7 +62,7 @@ const options: swaggerJsdoc.Options = {
         },
         Comment: {
           type: "object",
-          required: ["postId", "content", "sender"],
+          required: ["postId", "content", "sender", "date"],
           properties: {
             _id: {
               type: "string",
