@@ -120,7 +120,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "emaaa@gmail.com",
+    "email": "emaa@gmail.com",
     "password": "12344"
 }
 
@@ -130,7 +130,7 @@ Content-Type: application/json
 
 {
     "refreshToken": 
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdhNTQ4YjU1NGMyODI4NTUyMDFkNjciLCJpYXQiOjE3Njk2MzA3MjMsImV4cCI6MTc2OTcxNzEyM30.zDEL6FVoRsF3GsjZFfLPdNo7fTjStCO7GQMSpsg8KgM"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTdkZGJlZjA2ZGVmMzNkNWRmZDFhYjYiLCJpYXQiOjE3Njk4NTYwNTcsImV4cCI6MTc2OTk0MjQ1N30.f7OnVwl30N2BsT-AC96iACgubfvUg3zsJ8AYvv5ChFM"
 }
 
 ###

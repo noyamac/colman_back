@@ -9,7 +9,7 @@ class UsersController extends baseController<UserDocument> {
   }
 
   async update(req: AuthRequest, res: Response) {
-    const userId = (req as any).user?._id;
+    const userId = req.user?._id;
     const currUser = await user.findById(req.params.id);
     if (currUser?._id.toString() !== userId) {
       res.status(403).json({ error: "Forbidden" });
@@ -19,7 +19,7 @@ class UsersController extends baseController<UserDocument> {
   }
 
   async delete(req: AuthRequest, res: Response) {
-    const userId = (req as any).user?._id;
+    const userId = req.user?._id;
     const currUser = await user.findById(req.params.id);
     if (currUser?._id.toString() !== userId) {
       res.status(403).json({ error: "Forbidden" });

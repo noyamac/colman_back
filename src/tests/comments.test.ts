@@ -1,55 +1,10 @@
-import mongoose from "mongoose";
-import { comment } from "../model/commentModel";
-import { user } from "../model/userModel";
-import { initApp } from "..";
-import request from "supertest";
-import { Express } from "express";
-
-const commentMock = [
-  {
-    sender: "aaaa",
-    postId: "1234",
-    content: "this post is great",
-    date: new Date(),
-  },
-  {
-    sender: "bbbb",
-    postId: "5678",
-    content: "this post is excellent",
-    date: new Date(),
-  },
-  {
-    sender: "cccc",
-    postId: "1234",
-    content: "this post is good",
-    date: new Date(),
-  },
-  {
-    sender: "dddd",
-    postId: "11111",
-    content: "this post is fine",
-    date: new Date(),
-  },
-  {
-    sender: "eeee",
-    postId: "222",
-    content: "Nice post",
-    date: new Date(),
-  },
-  {
-    sender: "ffff",
-    postId: "333",
-    content: "Excellent post",
-    date: new Date(),
-  },
-];
-
-export const userMock = {
-  username: "testuser2",
-  email: "test2@test.com",
-  password: "password123",
-  profilePicture: "pic.jpg",
-};
+import mongoose from 'mongoose';
+import { comment } from '../model/commentModel';
+import { user } from '../model/userModel';
+import { initApp } from '..';
+import request from 'supertest';
+import { Express } from 'express';
+import { commentMock, userMock } from './testMocks';
 
 let accessToken: string;
 let userId: string;
@@ -60,7 +15,7 @@ beforeAll(async () => {
   await comment.deleteMany();
   await user.deleteMany();
 
-  const userRes = await request(app).post("/auth/register").send(userMock);
+  const userRes = await request(app).post('/auth/register').send(userMock);
 
   accessToken = userRes.body.tokens.token;
   const savedUser = await user.findOne({ email: userMock.email });
@@ -75,17 +30,17 @@ afterAll((done) => {
   done();
 });
 
-describe("Comments API", () => {
-  test("Get comments empty db", async () => {
-    const response = await request(app).get("/comment");
+describe('Comments API', () => {
+  test('Get comments empty db', async () => {
+    const response = await request(app).get('/comment');
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual([]);
   });
 
-  test("Post a new comment", async () => {
+  test('Post a new comment', async () => {
     const response = await request(app)
-      .post("/comment")
-      .set("Authorization", "Bearer " + accessToken)
+      .post('/comment')
+      .set('Authorization', 'Bearer ' + accessToken)
       .send(commentMock[0]);
     expect(response.statusCode).toBe(201);
     const { sender, ...expectedComment } = commentMock[0];
@@ -95,71 +50,71 @@ describe("Comments API", () => {
     });
   });
 
-  test("Post two comments", async () => {
+  test('Post two comments', async () => {
     const response = await request(app)
-      .post("/comment")
-      .set("Authorization", "Bearer " + accessToken)
+      .post('/comment')
+      .set('Authorization', 'Bearer ' + accessToken)
       .send([commentMock[1], commentMock[2]]);
     expect(response.statusCode).toBe(201);
     expect(response.body.length).toBe(2);
   });
 
-  test("Get comments after post", async () => {
-    const response = await request(app).get("/comment");
+  test('Get comments after post', async () => {
+    const response = await request(app).get('/comment');
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(3);
   });
 
-  test("Get comments by post id", async () => {
+  test('Get comments by post id', async () => {
     const comment = commentMock[0];
     const response = await request(app).get(
-      "/comment?postId=" + comment.postId,
+      '/comment?postId=' + comment.postId,
     );
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(2);
   });
 
-  test("Get comment by id", async () => {
+  test('Get comment by id', async () => {
     const commentId = (
       await request(app)
-        .post("/comment")
-        .set("Authorization", "Bearer " + accessToken)
+        .post('/comment')
+        .set('Authorization', 'Bearer ' + accessToken)
         .send(commentMock[3])
     ).body._id;
-    const response = await request(app).get("/comment/" + commentId);
+    const response = await request(app).get('/comment/' + commentId);
 
     expect(response.body._id).toBe(commentId);
   });
 
-  test("Update comment by id", async () => {
+  test('Update comment by id', async () => {
     const commentId = (
       await request(app)
-        .post("/comment")
-        .set("Authorization", "Bearer " + accessToken)
+        .post('/comment')
+        .set('Authorization', 'Bearer ' + accessToken)
         .send(commentMock[4])
     ).body._id;
-    commentMock[4].content = "great post";
+    commentMock[4].content = 'great post';
     const response = await request(app)
-      .put("/comment/" + commentId)
-      .set("Authorization", "Bearer " + accessToken)
+      .put('/comment/' + commentId)
+      .set('Authorization', 'Bearer ' + accessToken)
       .send(commentMock[4]);
     expect(response.statusCode).toBe(200);
     expect(response.body.content).toBe(commentMock[4].content);
   });
 
-  test("Delete comment by id", async () => {
+  test('Delete comment by id', async () => {
     const commentId = (
       await request(app)
-        .post("/comment")
-        .set("Authorization", "Bearer " + accessToken)
+        .post('/comment')
+        .set('Authorization', 'Bearer ' + accessToken)
         .send(commentMock[5])
     ).body._id;
     const deleteResponse = await request(app)
-      .delete("/comment/" + commentId)
-      .set("Authorization", "Bearer " + accessToken);
+      .delete('/comment/' + commentId)
+      .set('Authorization', 'Bearer ' + accessToken);
     expect(deleteResponse.statusCode).toBe(200);
 
-    const getResponse = await request(app).get("/comment/" + commentId);
+    const getResponse = await request(app).get('/comment/' + commentId);
     expect(getResponse.statusCode).toBe(404);
   });
 });
