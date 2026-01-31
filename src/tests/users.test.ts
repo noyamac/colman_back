@@ -69,4 +69,24 @@ describe('Users API', () => {
     const getRes = await request(app).get('/user/' + userId);
     expect(getRes.statusCode).toBe(404);
   });
+
+  test('Delete user forbidden', async () => {
+    const newUser = {
+      username: 'testuser4',
+      email: 'test4@test.com',
+      password: 'password143',
+      profilePicture: 'pic.jpg',
+    };
+
+    const createRes = await request(app)
+      .post('/user')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send(newUser);
+
+    const res = await request(app)
+      .delete('/user/' + createRes.body._id.toString())
+      .set('Authorization', 'Bearer ' + accessToken);
+
+    expect(res.statusCode).toBe(403);
+  });
 });

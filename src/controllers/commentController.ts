@@ -9,14 +9,14 @@ class CommentsController extends baseController<CommentDocument> {
   }
 
   async create(req: AuthRequest, res: Response) {
-    const userId = (req as any).user?._id;
+    const userId = req.user?._id;
 
     req.body.sender = userId;
     return super.create(req, res);
   }
 
   async update(req: AuthRequest, res: Response) {
-    const userId = (req as any).user?._id;
+    const userId = req.user?._id;
     const currComment = await comment.findById(req.params.id);
     if (currComment?.sender.toString() !== userId) {
       res.status(403).json({ error: "Forbidden" });
@@ -26,7 +26,7 @@ class CommentsController extends baseController<CommentDocument> {
   }
 
   async delete(req: AuthRequest, res: Response) {
-    const userId = (req as any).user?._id;
+    const userId = req.user?._id;
     const currComment = await comment.findById(req.params.id);
     if (currComment?.sender.toString() !== userId) {
       res.status(403).json({ error: "Forbidden" });
