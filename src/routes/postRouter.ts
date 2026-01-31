@@ -78,6 +78,8 @@ postRouter.get("/:id", postController.getById.bind(postController));
  *     summary: Create a new post
  *     description: Create a new post.
  *     tags: [Posts]
+ *     security:
+ *     - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -127,6 +129,8 @@ postRouter.post(
  *     summary: Delete a post
  *     description: Delete an existing post by ID.
  *     tags: [Posts]
+ *     security:
+ *      - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -165,6 +169,8 @@ postRouter.delete(
  *     summary: Update a post
  *     description: Update an existing post by ID.
  *     tags: [Posts]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
